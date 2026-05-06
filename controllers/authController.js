@@ -186,7 +186,7 @@ exports.logout = async (req, res) => {
   try {
     res.status(200).json({
       status: "success",
-      message: "Logout successful. Please remove the token from frontend storage."
+      message: "Logout successful."
     });
   } catch (err) {
     res.status(500).json({
