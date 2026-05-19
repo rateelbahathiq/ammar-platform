@@ -3,6 +3,12 @@ const sequelize = require("../config/db");
 const User = require("./user");
 
 const Company = sequelize.define("Company", {
+
+  companyName: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+
   ownerName: {
     type: DataTypes.STRING,
     allowNull: false
@@ -11,7 +17,8 @@ const Company = sequelize.define("Company", {
   companyCategory: {
     type: DataTypes.ENUM(
       "engineering",
-      "contracting"
+      "contracting",
+      "materials_store"
     ),
     allowNull: false
   },
@@ -20,15 +27,6 @@ const Company = sequelize.define("Company", {
     type: DataTypes.ENUM(
       "full_construction",
       "partial_construction"
-    ),
-    allowNull: true
-  },
-
-  type: {
-    type: DataTypes.ENUM(
-      "full_construction",
-      "partial_construction",
-      "materials_supplier"
     ),
     allowNull: true
   },
@@ -43,25 +41,45 @@ const Company = sequelize.define("Company", {
 
   vatNumber: {
     type: DataTypes.BIGINT,
-    allowNull: false,
+    allowNull: true,
     validate: {
       isNumeric: true
     }
   },
 
-  establishmentNumber: {
-    type: DataTypes.BIGINT,
-    allowNull: false,
-    validate: {
-      isNumeric: true
-    }
+  commercialRegistrationFile: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+
+  taxCertificateFile: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+
+  engineeringLicenseFile: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+
+  activityLicenseFile: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+
+  status: {
+    type: DataTypes.ENUM(
+      "pending",
+      "approved",
+      "rejected"
+    ),
+    defaultValue: "pending"
   }
 
 }, {
   timestamps: true
 });
 
-// Relationships
 User.hasOne(Company, { foreignKey: "user_id" });
 Company.belongsTo(User, { foreignKey: "user_id" });
 
