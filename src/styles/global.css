@@ -1,0 +1,17 @@
+:root {
+  --primary: #1f4d3c;
+  --secondary: #d3b08a;
+  --background: #f5f2ed;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  direction: rtl;
+  background: var(--background);
+  font-family: Arial, sans-serif;
+}
